@@ -1,0 +1,31 @@
+stages: [quality, test, build]
+
+default:
+  image: python:3.12-slim
+  cache:
+    key: pip
+    paths: [.cache/pip]
+  before_script:
+    - python -m pip install --cache-dir .cache/pip -e ".[test]"
+
+compile:
+  stage: quality
+  script:
+    - python -m compileall -q src tests
+    - python -m wazuh_sigma.pipeline --help
+
+test:
+  stage: test
+  script:
+    - python -m pytest
+
+convert-and-validate-examples:
+  stage: build
+  script:
+    - python -m wazuh_sigma.converter.sigma_converter -d examples/sigma -o build/sigmahq/sigma_rules.xml -r build/conversion-report.json
+    - python -m wazuh_sigma.validator.rule_validator -r build/sigmahq/sigma_rules.xml -o json
+    - python scripts/smoke_test_sigma_rules.py --sigma-dir examples/sigma --output build/sigmahq/sigma_rules.xml --report build/sigma-smoke-report.json
+    - python -m wazuh_sigma.pipeline --config ci/pipeline.yml smoke
+  artifacts:
+    when: always
+    paths: [build/]

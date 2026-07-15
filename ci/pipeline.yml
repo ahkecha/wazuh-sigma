@@ -1,0 +1,57 @@
+sigma_dir: ../examples/sigma
+build_dir: build
+output_file: build/sigmahq/sigma_rules.xml
+conversion_report: build/conversion-report.json
+smoke_report: build/sigma-smoke-report.json
+wazuh:
+  rule_id_start: 900000
+  rule_id_end: 949999
+  parent_rules:
+    product:
+      windows: 60000
+    service:
+      security: 60001
+      system: 60002
+      application: 60003
+      sysmon: 60004
+      windefend: 60005
+      windows-defender: 60005
+      powershell: 60000
+      wmi: 60018
+    category:
+      process_creation: 61603
+      file_change: 61604
+      network_connection: 61605
+      driver_load: 61608
+      image_load: 61609
+      create_remote_thread: 61610
+      raw_access_thread: 61611
+      process_access: 61612
+      file_event: 61613
+      registry_add: 61614
+      registry_delete: 61614
+      registry_event:
+        - 61614
+        - 61615
+        - 61616
+      registry_rename: 61616
+      registry_set: 61615
+      create_stream_hash: 61617
+      pipe_created:
+        - 61645
+        - 61646
+      wmi_event:
+        - 61647
+        - 61648
+        - 61649
+      dns_query: 61650
+      file_delete:
+        - 61651
+        - 61654
+      process_tampering: 61653
+      ps_script: 91802
+      ps_module: 91801
+      ps_classic_start: 91801
+      ps_classic_provider_start: 91801
+    default: 60000
+  remote_file: sigma_rules.xml

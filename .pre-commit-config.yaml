@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.28.0
+    hooks:
+      - id: gitleaks
+  - repo: local
+    hooks:
+      - id: repository-sensitive-data
+        name: repository sensitive-data policy
+        entry: python scripts/scan_sensitive_data.py --all-files
+        language: system
+        pass_filenames: false

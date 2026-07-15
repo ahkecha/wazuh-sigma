@@ -1,0 +1,14 @@
+{
+  "_fixture_metadata": {
+    "fixture_schema_version": "wazuh-windows-fixture-v1",
+    "source": "synthetic",
+    "synthetic": true,
+    "provider": "Microsoft-Windows-DNS-Client",
+    "channel": "Microsoft-Windows-DNS-Client/Operational",
+    "event_id": 3008
+  },
+  "decoded": {
+    "system": {"eventID": "3008", "computer": "LAB-WIN01"},
+    "eventdata": {"queryName": "service.example.invalid", "queryType": "1", "queryResults": "192.0.2.10"}
+  }
+}

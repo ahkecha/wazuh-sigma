@@ -1,0 +1,134 @@
+sigma_dir: examples/sigma
+build_dir: build
+output_file: build/sigmahq/sigma_rules.xml
+conversion_report: build/conversion-report.json
+smoke_report: build/sigma-smoke-report.json
+strict_validation: false
+wazuh:
+  host: https://wazuh.example.invalid
+  insecure: false
+  timeout: 30
+  ca_bundle:
+  rule_id_start: 900000
+  rule_id_end: 949999
+  field_mapping_version: wazuh-windows-eventdata-v1
+  parent_rules:
+    # Wazuh 4.x Windows EventChannel parent rules. Override these if the target
+    # manager ruleset differs. These IDs scope generated Sigma rules to decoded
+    # Windows events before field matching runs.
+    product:
+      windows: 60000
+    service:
+      security: 60001
+      system: 60002
+      application: 60003
+      sysmon: 60004
+      windefend: 60005
+      windows-defender: 60005
+      powershell: 60000
+      wmi: 60018
+    security_event_id:
+      # Live Wazuh dev emits Windows Security 4720 account-creation alerts as
+      # native rule 60109, so generated Sigma rules for that event must chain
+      # from 60109 instead of the generic Security EventChannel parent.
+      4720: 60109
+    category:
+      process_creation: 61603
+      file_change: 61604
+      network_connection: 61605
+      driver_load: 61608
+      image_load: 61609
+      create_remote_thread: 61610
+      raw_access_thread: 61611
+      process_access: 61612
+      file_event: 61613
+      registry_add: 61614
+      registry_delete: 61614
+      registry_event:
+        - 61614
+        - 61615
+        - 61616
+      registry_rename: 61616
+      registry_set: 61615
+      create_stream_hash: 61617
+      pipe_created:
+        - 61645
+        - 61646
+      wmi_event:
+        - 61647
+        - 61648
+        - 61649
+      dns_query: 61650
+      file_delete:
+        - 61651
+        - 61654
+      process_tampering: 61653
+      ps_script: 91802
+      ps_module: 91801
+      ps_classic_start: 91801
+      ps_classic_provider_start: 91801
+    default: 60000
+  remote_file: sigma_rules.xml
+  backup_dir: backups/wazuh
+
+# Optional, non-authoritative OpenAI advisor. Disabled by default; when enabled
+# it defaults to report-only mode, which never changes generated XML. The API
+# key must come from the OPENAI_API_KEY environment variable, never this file.
+advisor:
+  enabled: false
+  mode: report-only          # report-only | review | apply (apply requires explicit opt-in)
+  provider: openai
+  # Required when enabled. There is no default — set these to model IDs your
+  # OpenAI account actually has access to (verify against the model catalog).
+  primary_model:             # e.g. a small, cheap chat/completions model
+  escalation_model:          # optional; leave empty to disable escalation
+  timeout_seconds: 30
+  max_retries: 3
+  max_output_tokens: 400
+  minimum_confidence: 0.80    # below this, recommendations are never applied
+  maximum_level_delta: 2      # reject recommendations that move the level too far
+  fail_open: true             # advisor failure falls back to deterministic conversion
+  cache_enabled: true
+  cache_directory: build/advisor-cache
+  changed_only: true          # reuse cached recommendations for unchanged rules
+  strict_sanitization: false  # true => reject requests containing high-risk secrets
+  escalation:
+    enabled: true
+    confidence_below: 0.70    # escalate to escalation_model below this confidence
+    max_requests: 100         # hard ceiling on provider requests per run
+
+# Optional autonomous detection validation. Disabled unless you explicitly run
+# `sigma-pipeline active-test`. Secrets come from environment variables, never
+# this file. Caldera executes safe test manifests on a connected Windows agent;
+# the Wazuh indexer is polled for the expected alert evidence.
+active_test:
+  enabled: false
+  test_dir: tests/active
+  generated_test_dir: build/active-tests
+  report: build/active-test-report.json
+  generate_with_openai: false
+  # Required only when generate_with_openai is true or when using
+  # `sigma-pipeline generate-active-tests` / `active-test --generate-tests`.
+  # Pick a model your OpenAI account can access; the API key comes from
+  # openai_api_key_env and must never be committed.
+  openai_model:
+  openai_api_key_env: OPENAI_API_KEY
+  openai_timeout_seconds: 30
+  openai_max_output_tokens: 800
+  openai_max_retries: 3
+  caldera_url: http://127.0.0.1:8888
+  caldera_api_key_env: CALDERA_API_KEY
+  caldera_auth_header: KEY
+  caldera_auth_scheme: ""
+  agent_platform: windows
+  agent_group:
+  operation_timeout_seconds: 180
+  operation_poll_interval_seconds: 5
+  alert_indexer_url:
+  alert_index: wazuh-alerts-*
+  alert_username_env: WAZUH_INDEXER_USER
+  alert_password_env: WAZUH_INDEXER_PASSWORD
+  alert_timeout_seconds: 120
+  alert_poll_interval_seconds: 5
+  insecure: false
+  ca_bundle:

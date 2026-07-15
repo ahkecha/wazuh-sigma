@@ -1,0 +1,73 @@
+# Repository metadata and local agent state
+.git/
+.agents/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+!config/.env.example
+config/secrets.*
+credentials.*
+*.key
+*.pem
+
+# Python/runtime caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+pytest-cache-files-*/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# Virtual environments and local installs
+.venv/
+venv/
+local/
+
+# Generated build/test/pipeline artifacts
+build/
+dist/
+output/
+results/
+reports/
+test_reports/
+test_cases/
+converted_rules/
+converted_rules.xml
+validation_report*
+htmlcov/
+.coverage
+.coverage.*
+.tmp/
+
+# Logs, temporary files, and OS/editor noise
+*.log
+!tests/fixtures/*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.code-workspace
+
+# Large external/generated analysis corpora
+sigma/
+graphify-out/
+cross_reference_output.json
+windows_event_inventory.json
+windows_sigma_fields_analysis.json
+CROSS_REFERENCE_ANALYSIS_REPORT.md
+
+# One-off local analysis helpers
+analyze_windows_events.py
+create_windows_fixtures.py
+generate_windows_optimization_reports.py

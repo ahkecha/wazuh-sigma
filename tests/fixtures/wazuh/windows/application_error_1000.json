@@ -1,0 +1,14 @@
+{
+  "_fixture_metadata": {
+    "fixture_schema_version": "wazuh-windows-fixture-v1",
+    "source": "synthetic",
+    "synthetic": true,
+    "provider": "Application Error",
+    "channel": "Application",
+    "event_id": 1000
+  },
+  "decoded": {
+    "system": {"eventID": "1000", "computer": "LAB-WIN01"},
+    "eventdata": {"appName": "example.exe", "appPath": "C:\\Program Files\\Example\\example.exe", "exceptionCode": "0xc0000005"}
+  }
+}

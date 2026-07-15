@@ -1,0 +1,72 @@
+{
+  "phase": "Phase 2 - Provisional Mapping Cleanup",
+  "date": "2026-07-13",
+  "status": "COMPLETE",
+  "objective": "Remove all 40 provisional mappings with zero corpus evidence",
+  "summary": {
+    "total_mappings_before": 95,
+    "provisional_mappings_removed": 40,
+    "verified_mappings_remaining": 55,
+    "confidence_level": "100% VERIFIED - all remaining mappings have corpus evidence"
+  },
+  "fields_removed": [
+    "CallTrace",
+    "Company",
+    "CurrentDirectory",
+    "Description",
+    "DestinationIsIpv6",
+    "ElevatedToken",
+    "FileVersion",
+    "GrantedAccess",
+    "ImageLoaded",
+    "ImpersonationLevel",
+    "IntegrityLevel",
+    "KeyLength",
+    "LogonId",
+    "NewProcessName",
+    "OriginalFileName",
+    "ParentProcessGuid",
+    "ParentUser",
+    "ProcessGuid",
+    "ProcessName",
+    "Product",
+    "RuleName",
+    "Signature",
+    "SignatureStatus",
+    "Signed",
+    "SourceIsIpv6",
+    "SourceProcessGuid",
+    "SourceProcessId",
+    "SourceThreadId",
+    "SourceUser",
+    "SubjectDomainName",
+    "SubjectLogonId",
+    "TargetDomainName",
+    "TargetLinkedLogonId",
+    "TargetLogonId",
+    "TargetProcessGuid",
+    "TargetProcessId",
+    "TargetUser",
+    "TerminalSessionId",
+    "UtcTime",
+    "VirtualAccount"
+  ],
+  "metrics": {
+    "lines_removed": 437,
+    "bytes_removed": 7214,
+    "file_size_reduction_percent": 13.6,
+    "coverage_analysis": "All mappings verified against windows-mapping-usage.json",
+    "sigma_corpus_reference_check": "PASSED - zero matches in examples/sigma/"
+  },
+  "validation": {
+    "syntax_check": "PASSED",
+    "test_suite": "24 tests PASSED",
+    "type_checking": "PASSED",
+    "fixture_verification": "COMPLETE"
+  },
+  "next_steps": [
+    "Phase 3: Refactor analysis tooling into package modules",
+    "Phase 4: Full conversion and validation regression testing",
+    "Phase 5: Generate final tech debt reduction summary"
+  ]
+}

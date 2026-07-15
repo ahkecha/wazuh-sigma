@@ -1,0 +1,41 @@
+# Standalone Wazuh manager for local rule validation only.
+services:
+  wazuh.manager:
+    image: wazuh/wazuh-manager:${WAZUH_VERSION:-4.14.6}
+    container_name: wazuh-rule-test
+    hostname: wazuh-rule-test
+    restart: unless-stopped
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - >-
+        if compgen -G "/sigma-rules/sigma_rules_*.xml" > /dev/null; then
+          cp /sigma-rules/sigma_rules_*.xml /var/ossec/etc/rules/;
+        else
+          cp /sigma-rules/*.xml /var/ossec/etc/rules/;
+        fi &&
+        exec /init
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 655360
+        hard: 655360
+    ports:
+      - "127.0.0.1:${WAZUH_API_PORT:-55000}:55000"
+    volumes:
+      - wazuh_etc:/var/ossec/etc
+      - wazuh_logs:/var/ossec/logs
+      - wazuh_queue:/var/ossec/queue
+      - ./build/sigmahq:/sigma-rules:ro
+    healthcheck:
+      test: ["CMD-SHELL", "/var/ossec/bin/wazuh-control status | grep -q 'wazuh-analysisd is running'"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
+
+volumes:
+  wazuh_etc:
+  wazuh_logs:
+  wazuh_queue:

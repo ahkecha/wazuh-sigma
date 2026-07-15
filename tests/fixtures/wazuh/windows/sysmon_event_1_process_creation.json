@@ -1,0 +1,28 @@
+{
+  "_fixture_metadata": {
+    "fixture_schema_version": "wazuh-windows-fixture-v1",
+    "source": "synthetic",
+    "synthetic": true,
+    "provider": "Microsoft-Windows-Sysmon",
+    "channel": "Microsoft-Windows-Sysmon/Operational",
+    "event_id": 1
+  },
+  "decoded": {
+    "system": {
+      "eventID": "1",
+      "computer": "LAB-WIN01",
+      "providerName": "Microsoft-Windows-Sysmon"
+    },
+    "eventdata": {
+      "image": "C:\\Windows\\System32\\notepad.exe",
+      "commandLine": "notepad.exe synthetic.txt",
+      "parentImage": "C:\\Windows\\explorer.exe",
+      "parentCommandLine": "explorer.exe",
+      "processId": "1000",
+      "parentProcessId": "500",
+      "user": "EXAMPLE\\analyst",
+      "processGuid": "{00000000-0000-4000-8000-000000000001}",
+      "hashes": "SHA256=0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  }
+}

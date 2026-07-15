@@ -1,0 +1,22 @@
+{
+  "baseline_commit": "e439b9a",
+  "chunk_count": 4,
+  "chunk_validation": {
+    "failed": 0,
+    "total_checks": 98075,
+    "total_files": 4,
+    "warnings": 523
+  },
+  "compiler_commit": "a2ac633d0568639ad582f03e22a0fa782a11162f",
+  "generated_at": "2026-07-15T16:14:13Z",
+  "generated_wazuh_rules": 10701,
+  "native_validation": "passed",
+  "native_validator": "wazuh-analysisd -t",
+  "rules_source": "build/reports/strict-next2/chunks",
+  "wazuh_version": "4.14.6",
+  "xml_validation": {
+    "failed": 0,
+    "total_checks": 98072,
+    "warnings": 523
+  }
+}

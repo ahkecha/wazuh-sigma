@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+local/
+
+# Tests and tooling
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tmp/
+pytest-cache-files-*/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# Generated pipeline output
+output/
+results/
+reports/
+test_reports/
+test_cases/
+converted_rules/
+converted_rules.xml
+validation_report*
+*.log
+!tests/fixtures/*.log
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+!config/.env.example
+config/secrets.*
+credentials.*
+*.key
+*.pem
+
+# IDE and operating system
+.idea/
+.vscode/
+*.code-workspace
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+
+# Local analysis output
+graphify-out/
+sigma/
+.agents/
+FINAL_TEST_REPORT.txt
+schematic.md
+PROJECT_STRUCTURE_GUIDE.md
+RUN_REORGANIZATION.sh

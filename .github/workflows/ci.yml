@@ -1,0 +1,174 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package
+        run: python -m pip install -e ".[test]"
+
+      - name: Compile source and tests
+        run: python -m compileall -q src tests scripts
+
+      - name: Run unit and smoke tests
+        run: python -m pytest
+
+      - name: Run config-driven pipeline smoke
+        run: python -m wazuh_sigma.pipeline --config ci/pipeline.yml smoke
+
+      - name: Upload generated rule artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sigma-rules-python-${{ matrix.python-version }}
+          path: |
+            build/sigmahq/sigma_rules.xml
+            build/conversion-report.json
+            build/sigma-smoke-report.json
+          if-no-files-found: ignore
+
+  windows-corpus-evidence:
+    name: Windows corpus evidence gates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check out pinned SigmaHQ corpus
+        uses: actions/checkout@v4
+        with:
+          repository: SigmaHQ/sigma
+          ref: 282369fa76c5cd6103b055478fbaebec8530cfa5
+          path: sigma
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install package
+        run: python -m pip install -e ".[test]"
+
+      - name: Field mapping tests
+        run: python -m pytest tests/test_fields_windows.py tests/test_backend_field_mapping.py -v --tb=short
+
+      - name: Full Windows corpus conversion evidence
+        run: |
+          python -m wazuh_sigma.converter.cli \
+            --directory sigma/rules/windows \
+            --output build/reports/current/windows-corpus/sigma_rules.xml \
+            --report build/reports/current/windows-corpus/conversion-report.json \
+            --verbose CRITICAL || true
+          test -f build/reports/current/windows-corpus/conversion-report.json
+
+      - name: Windows corpus regression report
+        run: |
+          python scripts/windows_corpus_regression.py \
+            --current build/reports/current/windows-corpus/conversion-report.json \
+            --baseline ci/baselines/windows-conversion-full-report.json \
+            --json-output build/reports/current/windows-corpus-regression.json \
+            --markdown-output build/reports/current/windows-corpus-regression.md
+
+      - name: Removed mapping audit
+        run: |
+          python scripts/windows_removed_mapping_audit.py \
+            --cleanup ci/baselines/windows-mapping-cleanup.json \
+            --previous-evidence ci/baselines/windows_mapping_evidence_classification.json \
+            --json-output build/reports/current/windows-removed-mapping-audit.json \
+            --markdown-output build/reports/current/windows-removed-mapping-audit.md
+
+      - name: Validate generated XML and chunks
+        run: |
+          python -m wazuh_sigma.validator.cli --rules build/reports/current/windows-corpus/sigma_rules.xml
+          python -m wazuh_sigma.validator.cli --rules build/reports/current/windows-corpus/chunks
+
+      - name: Windows fixture tooling tests
+        run: python -m pytest tests/test_windows_cli.py -v --tb=short
+
+      - name: Upload Windows corpus evidence artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-corpus-evidence
+          path: |
+            build/reports/current/windows-corpus/sigma_rules.xml
+            build/reports/current/windows-corpus/chunks/*.xml
+            build/reports/current/windows-corpus/chunks/manifest.json
+            build/reports/current/windows-corpus/conversion-report.json
+            build/reports/current/windows-corpus-regression.json
+            build/reports/current/windows-corpus-regression.md
+            build/reports/current/windows-removed-mapping-audit.json
+            build/reports/current/windows-removed-mapping-audit.md
+            evidence/*.json
+          if-no-files-found: ignore
+
+  advisor-quality:
+    name: Advisor quality gates
+    runs-on: ubuntu-latest
+    env:
+      ADVISOR_SRC: src/wazuh_sigma/advisor
+      ADVISOR_TESTS: >-
+        tests/advisor_helpers.py
+        tests/test_advisor_models.py
+        tests/test_advisor_features.py
+        tests/test_advisor_sanitizer.py
+        tests/test_advisor_policy.py
+        tests/test_advisor_cache.py
+        tests/test_advisor_provider.py
+        tests/test_advisor_service.py
+        tests/test_advisor_config.py
+        tests/test_advisor_integration.py
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install package with dev tooling
+        run: python -m pip install -e ".[dev]"
+
+      - name: black --check
+        run: black --check $ADVISOR_SRC $ADVISOR_TESTS
+
+      - name: isort --check-only
+        run: isort --check-only $ADVISOR_SRC $ADVISOR_TESTS
+
+      - name: mypy
+        run: mypy $ADVISOR_SRC
+
+      - name: bandit
+        run: bandit -r $ADVISOR_SRC
+
+      - name: Advisor tests with coverage gate
+        run: >-
+          python -m pytest $ADVISOR_TESTS
+          --cov=wazuh_sigma.advisor --cov-fail-under=80

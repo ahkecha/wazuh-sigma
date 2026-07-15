@@ -1,0 +1,1086 @@
+{
+  "timestamp": "2026-07-13",
+  "phase": 1,
+  "description": "Evidence-based classification of all Windows field mappings",
+  "summary": {
+    "fixture_verified": 69,
+    "documentation_verified": 7,
+    "provisional": 10,
+    "unsupported": 9,
+    "total": 95
+  },
+  "mappings_by_classification": {
+    "fixture_verified": [
+      {
+        "sigma_field": "Image",
+        "wazuh_field": "win.eventdata.image",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "CommandLine",
+        "wazuh_field": "win.eventdata.commandLine",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ParentImage",
+        "wazuh_field": "win.eventdata.parentImage",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ParentCommandLine",
+        "wazuh_field": "win.eventdata.parentCommandLine",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ProcessId",
+        "wazuh_field": "win.eventdata.processId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ParentProcessId",
+        "wazuh_field": "win.eventdata.parentProcessId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "User",
+        "wazuh_field": "win.eventdata.user",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetFilename",
+        "wazuh_field": "win.eventdata.targetFilename",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourceIp",
+        "wazuh_field": "win.eventdata.sourceIp",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "DestinationIp",
+        "wazuh_field": "win.eventdata.destinationIp",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourcePort",
+        "wazuh_field": "win.eventdata.sourcePort",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "DestinationPort",
+        "wazuh_field": "win.eventdata.destinationPort",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Protocol",
+        "wazuh_field": "win.eventdata.protocol",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Details",
+        "wazuh_field": "win.eventdata.details",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Hashes",
+        "wazuh_field": "win.eventdata.hashes",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "LogonType",
+        "wazuh_field": "win.eventdata.logonType",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "LogonGuid",
+        "wazuh_field": "win.eventdata.logonGuid",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetUserName",
+        "wazuh_field": "win.eventdata.targetUserName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SubjectUserName",
+        "wazuh_field": "win.eventdata.subjectUserName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Domain",
+        "wazuh_field": "win.eventdata.domain",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "QueryName",
+        "wazuh_field": "win.eventdata.queryName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "AuthenticationPackageName",
+        "wazuh_field": "win.eventdata.authenticationPackageName",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "LogonProcessName",
+        "wazuh_field": "win.eventdata.logonProcessName",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SubjectUserSid",
+        "wazuh_field": "win.eventdata.subjectUserSid",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetUserSid",
+        "wazuh_field": "win.eventdata.targetUserSid",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "CallTrace",
+        "wazuh_field": "win.eventdata.callTrace",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Company",
+        "wazuh_field": "win.eventdata.company",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "CreationUtcTime",
+        "wazuh_field": "win.eventdata.creationUtcTime",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "CurrentDirectory",
+        "wazuh_field": "win.eventdata.currentDirectory",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Description",
+        "wazuh_field": "win.eventdata.description",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "DestinationIsIpv6",
+        "wazuh_field": "win.eventdata.destinationIsIpv6",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ElevatedToken",
+        "wazuh_field": "win.eventdata.elevatedToken",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "EventType",
+        "wazuh_field": "win.eventdata.eventType",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "FileVersion",
+        "wazuh_field": "win.eventdata.fileVersion",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "GrantedAccess",
+        "wazuh_field": "win.eventdata.grantedAccess",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ImageLoaded",
+        "wazuh_field": "win.eventdata.imageLoaded",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ImpersonationLevel",
+        "wazuh_field": "win.eventdata.impersonationLevel",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "IntegrityLevel",
+        "wazuh_field": "win.eventdata.integrityLevel",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "KeyLength",
+        "wazuh_field": "win.eventdata.keyLength",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "LogonId",
+        "wazuh_field": "win.eventdata.logonId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "OriginalFileName",
+        "wazuh_field": "win.eventdata.originalFileName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ParentProcessGuid",
+        "wazuh_field": "win.eventdata.parentProcessGuid",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ParentUser",
+        "wazuh_field": "win.eventdata.parentUser",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ProcessGuid",
+        "wazuh_field": "win.eventdata.processGuid",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ProcessName",
+        "wazuh_field": "win.eventdata.processName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Product",
+        "wazuh_field": "win.eventdata.product",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "QueryResults",
+        "wazuh_field": "win.eventdata.queryResults",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "QueryStatus",
+        "wazuh_field": "win.eventdata.queryStatus",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "RuleName",
+        "wazuh_field": "win.eventdata.ruleName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Signature",
+        "wazuh_field": "win.eventdata.signature",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SignatureStatus",
+        "wazuh_field": "win.eventdata.signatureStatus",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Signed",
+        "wazuh_field": "win.eventdata.signed",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourceIsIpv6",
+        "wazuh_field": "win.eventdata.sourceIsIpv6",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourceProcessGuid",
+        "wazuh_field": "win.eventdata.sourceProcessGUID",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourceProcessId",
+        "wazuh_field": "win.eventdata.sourceProcessId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourceThreadId",
+        "wazuh_field": "win.eventdata.sourceThreadId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourceUser",
+        "wazuh_field": "win.eventdata.sourceUser",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SubjectDomainName",
+        "wazuh_field": "win.eventdata.subjectDomainName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SubjectLogonId",
+        "wazuh_field": "win.eventdata.subjectLogonId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetDomainName",
+        "wazuh_field": "win.eventdata.targetDomainName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetLinkedLogonId",
+        "wazuh_field": "win.eventdata.targetLinkedLogonId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetLogonId",
+        "wazuh_field": "win.eventdata.targetLogonId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetObject",
+        "wazuh_field": "win.eventdata.targetObject",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetProcessGuid",
+        "wazuh_field": "win.eventdata.targetProcessGUID",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetProcessId",
+        "wazuh_field": "win.eventdata.targetProcessId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetUser",
+        "wazuh_field": "win.eventdata.targetUser",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TerminalSessionId",
+        "wazuh_field": "win.eventdata.terminalSessionId",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "UtcTime",
+        "wazuh_field": "win.eventdata.utcTime",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "VirtualAccount",
+        "wazuh_field": "win.eventdata.virtualAccount",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": [
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624"
+        ],
+        "found_in_fixture": true
+      }
+    ],
+    "documentation_verified": [
+      {
+        "sigma_field": "EventID",
+        "wazuh_field": "win.system.eventID",
+        "confidence": "VERIFIED",
+        "verification_source": "WINDOWS_DOCUMENTATION",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 5007",
+          "Microsoft-Windows-Perflib / Application / Event 1023",
+          "Microsoft-Windows-Security-SPP / Application / Event 16384",
+          "PowerShell / Windows PowerShell / Event 400",
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7",
+          "Service Control Manager / System / Event 7036",
+          "Microsoft-Windows-WMI-Activity / Microsoft-Windows-WMI-Activity/Operational / Event 5857"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Provider_Name",
+        "wazuh_field": "win.system.providerName",
+        "confidence": "VERIFIED",
+        "verification_source": "WINDOWS_DOCUMENTATION",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 5007",
+          "Microsoft-Windows-Perflib / Application / Event 1023",
+          "Microsoft-Windows-Security-SPP / Application / Event 16384",
+          "PowerShell / Windows PowerShell / Event 400",
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7",
+          "Service Control Manager / System / Event 7036",
+          "Microsoft-Windows-WMI-Activity / Microsoft-Windows-WMI-Activity/Operational / Event 5857"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Channel",
+        "wazuh_field": "win.system.channel",
+        "confidence": "VERIFIED",
+        "verification_source": "WINDOWS_DOCUMENTATION",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 5007",
+          "Microsoft-Windows-Perflib / Application / Event 1023",
+          "Microsoft-Windows-Security-SPP / Application / Event 16384",
+          "PowerShell / Windows PowerShell / Event 400",
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7",
+          "Service Control Manager / System / Event 7036",
+          "Microsoft-Windows-WMI-Activity / Microsoft-Windows-WMI-Activity/Operational / Event 5857"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "ComputerName",
+        "wazuh_field": "win.system.computer",
+        "confidence": "VERIFIED",
+        "verification_source": "WINDOWS_DOCUMENTATION",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 5007",
+          "Microsoft-Windows-Perflib / Application / Event 1023",
+          "Microsoft-Windows-Security-SPP / Application / Event 16384",
+          "PowerShell / Windows PowerShell / Event 400",
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7",
+          "Service Control Manager / System / Event 7036",
+          "Microsoft-Windows-WMI-Activity / Microsoft-Windows-WMI-Activity/Operational / Event 5857"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "SourceImage",
+        "wazuh_field": "win.eventdata.sourceImage",
+        "confidence": "HIGH",
+        "verification_source": "WINDOWS_DOCUMENTATION",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "TargetImage",
+        "wazuh_field": "win.eventdata.targetImage",
+        "confidence": "HIGH",
+        "verification_source": "WINDOWS_DOCUMENTATION",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Initiated",
+        "wazuh_field": "win.eventdata.initiated",
+        "confidence": "HIGH",
+        "verification_source": "WINDOWS_DOCUMENTATION",
+        "fixture_evidence": [
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3"
+        ],
+        "found_in_fixture": true
+      }
+    ],
+    "provisional": [
+      {
+        "sigma_field": "TargetHostname",
+        "wazuh_field": "win.eventdata.targetHostname",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "DomainName",
+        "wazuh_field": "win.eventdata.domainName",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "Account",
+        "wazuh_field": "win.eventdata.accountName",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "ServiceName",
+        "wazuh_field": "win.eventdata.serviceName",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "CallerProcessName",
+        "wazuh_field": "win.eventdata.callerProcessName",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "ProcessPath",
+        "wazuh_field": "win.eventdata.processPath",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "ExceptionCode",
+        "wazuh_field": "win.eventdata.exceptionCode",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "IpAddress",
+        "wazuh_field": "win.eventdata.ipAddress",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "IpPort",
+        "wazuh_field": "win.eventdata.ipPort",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "WorkstationName",
+        "wazuh_field": "win.eventdata.workstationName",
+        "confidence": "HIGH",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      }
+    ],
+    "unsupported": [
+      {
+        "sigma_field": "event_id",
+        "wazuh_field": "win.system.eventID",
+        "confidence": "VERIFIED",
+        "verification_source": "REPOSITORY_LEGACY",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 5007",
+          "Microsoft-Windows-Perflib / Application / Event 1023",
+          "Microsoft-Windows-Security-SPP / Application / Event 16384",
+          "PowerShell / Windows PowerShell / Event 400",
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7",
+          "Service Control Manager / System / Event 7036",
+          "Microsoft-Windows-WMI-Activity / Microsoft-Windows-WMI-Activity/Operational / Event 5857"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Hostname",
+        "wazuh_field": "win.system.computer",
+        "confidence": "VERIFIED",
+        "verification_source": "REPOSITORY_LEGACY",
+        "fixture_evidence": [
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1001",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 1013",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 2000",
+          "Microsoft-Windows-Windows Defender / Microsoft-Windows-Windows Defender/Operational / Event 5007",
+          "Microsoft-Windows-Perflib / Application / Event 1023",
+          "Microsoft-Windows-Security-SPP / Application / Event 16384",
+          "PowerShell / Windows PowerShell / Event 400",
+          "Microsoft-Windows-Security-Auditing / Security / Event 4624",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 1",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 10",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 11",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 13",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 22",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 3",
+          "Microsoft-Windows-Sysmon / Microsoft-Windows-Sysmon/Operational / Event 7",
+          "Service Control Manager / System / Event 7036",
+          "Microsoft-Windows-WMI-Activity / Microsoft-Windows-WMI-Activity/Operational / Event 5857"
+        ],
+        "found_in_fixture": true
+      },
+      {
+        "sigma_field": "Registry",
+        "wazuh_field": "win.eventdata.registryPath",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "RegistryPath",
+        "wazuh_field": "win.eventdata.registryPath",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "MD5",
+        "wazuh_field": "win.eventdata.md5",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "SHA1",
+        "wazuh_field": "win.eventdata.sha1",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "SHA256",
+        "wazuh_field": "win.eventdata.sha256",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "Imphash",
+        "wazuh_field": "win.eventdata.imphash",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      },
+      {
+        "sigma_field": "NewProcessName",
+        "wazuh_field": "win.eventdata.newProcessName",
+        "confidence": "VERIFIED",
+        "verification_source": "DECODED_FIXTURE",
+        "fixture_evidence": null,
+        "found_in_fixture": false
+      }
+    ]
+  }
+}

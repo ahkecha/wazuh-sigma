@@ -1,0 +1,53 @@
+{
+  "baseline_commit": "e439b9a",
+  "chunk_count": 4,
+  "compiler_commit": "a2ac633d0568639ad582f03e22a0fa782a11162f",
+  "configuration_hash": "361b112fedd0ea3f4a0352d095afbff11f759f07a5161cbb6f73f3af8303e66f",
+  "converted_rules": 1925,
+  "coverage_percent": 80.11,
+  "fixture_backed_mappings_added": [
+    "Action",
+    "AppName",
+    "ApplicationPath",
+    "ExceptionCode",
+    "ModifyingApplication",
+    "NewValue",
+    "Service",
+    "Workstation"
+  ],
+  "generated_at": "2026-07-15T16:14:13Z",
+  "generated_wazuh_rules": 10701,
+  "mapping_registry_version": "wazuh-windows-eventdata-v1",
+  "rejected_rules": 478,
+  "rejection_breakdown": {
+    "dnf_alternatives_limit": 103,
+    "dnf_predicates_per_alternative_limit": 6,
+    "fieldless_value_expression": 7,
+    "generated_child_rules_limit": 58,
+    "ipv6_cidr": 16,
+    "modifier_all_without_contains": 5,
+    "modifier_base64offset": 7,
+    "modifier_fieldref": 1,
+    "modifier_ignorecase": 1,
+    "null_checks": 58,
+    "unsupported_windows_field": 216
+  },
+  "semantic_features": {
+    "grouped_not": "exact De Morgan normalization to predicate negation plus DNF/child-rule planning",
+    "ipv4_cidr": "exact bounded dotted-quad PCRE2 lowering",
+    "oversized_same_field_or": "exact child-rule fallback when collapsed same-field OR would exceed max PCRE2 length",
+    "same_field_and_safe_regex": "independent lookahead conjunction for regex predicates with safe start-anchor placement"
+  },
+  "sigma_corpus_commit": "282369fa76c5cd6103b055478fbaebec8530cfa5",
+  "strict_mode": true,
+  "strict_rejections": [
+    "ipv6_cidr",
+    "null_checks",
+    "fieldref",
+    "base64offset",
+    "unsupported_windows_field_without_fixture",
+    "explosion_limits"
+  ],
+  "total_windows_rules": 2403,
+  "wazuh_version": "4.14.6"
+}

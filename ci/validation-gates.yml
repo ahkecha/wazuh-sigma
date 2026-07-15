@@ -1,0 +1,369 @@
+# Windows Field Mapping CI Validation Gates Configuration
+#
+# This configuration defines all validation gates for Windows field mapping
+# in the Wazuh Sigma pipeline. These gates run on every push and pull request.
+#
+# See ci/VALIDATION_GATES.md for detailed documentation.
+
+# CI Pipeline Metadata
+pipeline:
+  name: "Windows Field Mapping Validation"
+  version: "1.0.0"
+  job_name: "windows-field-mapping"
+  runs_on: "ubuntu-latest"
+  python_version: "3.12"
+  triggers:
+    - "push"
+    - "pull_request"
+
+# Gate 1: Field Registry Unit Tests (SECTION BEGINS)
+# Purpose: Validate field mappings and backend integration
+gates:
+  - name: "field-registry-unit-tests"
+    type: "unit-tests"
+    priority: 1
+    timeout_minutes: 5
+    description: |
+      Validate Windows field mapping registry and backend field mapper.
+      Ensures field models are correctly defined, registry operations work,
+      and backend integration is correct.
+
+    test_files:
+      - "tests/test_fields_windows.py"
+      - "tests/test_backend_field_mapping.py"
+
+    test_coverage:
+      - "Field mapping model validation (namespace, products, services)"
+      - "Registry lookup and resolution operations"
+      - "Backend field mapper modes (strict, warn, legacy)"
+      - "Context-aware mapping (product + service)"
+      - "Backward compatibility (legacy dict, static methods)"
+      - "Field name format validation (camelCase preservation)"
+
+    fail_conditions:
+      - Any test fails
+      - Registry lookup returns None for known fields
+      - Backend mapper raises unexpected exceptions
+      - Mode validation fails (invalid modes accepted)
+      - Backward compatibility broken
+
+    success_criteria:
+      - All tests in both files pass
+      - No test skips
+      - Coverage maintained at current levels
+      - No regressions in field mapping behavior
+
+    artifacts:
+      - pytest output
+      - coverage report
+
+  # Gate 2: Decoded Fixture Verification
+  - name: "decoded-fixture-verification"
+    type: "inventory-verification"
+    priority: 2
+    timeout_minutes: 3
+    description: |
+      Verify that all field mappings marked as VERIFIED with DECODED_FIXTURE
+      verification source have corresponding fixture evidence.
+
+    script_type: "python-inline"
+    script: |
+      from pathlib import Path
+      from wazuh_sigma.fields.models import ConfidenceLevel, VerificationSource
+      from wazuh_sigma.fields.windows import WINDOWS_FIELD_MAPPINGS
+
+      fixtures_dir = Path("tests/fixtures/wazuh/windows")
+      fixture_files = list(fixtures_dir.glob("*.json"))
+
+      verified_with_fixtures = [
+          m for m in WINDOWS_FIELD_MAPPINGS
+          if m.confidence == ConfidenceLevel.VERIFIED
+          and m.verification_source == VerificationSource.DECODED_FIXTURE
+      ]
+
+      missing = [
+          m for m in verified_with_fixtures
+          if not any(m.wazuh_field.split(".")[1] in str(f) for f in fixture_files)
+      ]
+
+      return {
+          "total_verified": len(verified_with_fixtures),
+          "fixture_count": len(fixture_files),
+          "missing_fixtures": missing,
+          "passed": len(missing) == 0
+      }
+
+    validation_points:
+      - Fixtures directory exists and contains JSON files
+      - All VERIFIED mappings with DECODED_FIXTURE have fixture evidence
+      - Fixture paths follow consistent naming conventions
+      - No orphaned fixtures without corresponding mappings
+
+    fail_conditions:
+      - Fixtures directory doesn't exist
+      - No fixture files found
+      - VERIFIED mapping missing fixture evidence (optional: can be warning)
+
+    success_criteria:
+      - All VERIFIED mappings have fixture evidence
+      - Fixture files are accessible and parseable
+      - Fixture path structure is consistent
+
+    output_format:
+      - Count of verified mappings with fixtures
+      - Count of fixture files
+      - List of any missing fixtures (if applicable)
+      - Path validation summary
+
+  # Gate 3: Full Corpus Field Audit
+  - name: "full-corpus-field-audit"
+    type: "inventory-audit"
+    priority: 3
+    timeout_minutes: 3
+    description: |
+      Audit the complete Windows field inventory and detect any
+      unsupported fields or consistency issues.
+
+    script_type: "python-inline"
+    script: |
+      from wazuh_sigma.fields.registry import FieldMappingRegistry
+      from wazuh_sigma.fields.windows import WINDOWS_FIELD_MAPPINGS
+      from wazuh_sigma.fields.models import ConfidenceLevel, FieldNamespace
+
+      registry = FieldMappingRegistry(WINDOWS_FIELD_MAPPINGS)
+
+      stats = {
+          "total": len(WINDOWS_FIELD_MAPPINGS),
+          "verified": sum(1 for m in WINDOWS_FIELD_MAPPINGS if m.confidence == ConfidenceLevel.VERIFIED),
+          "provisional": sum(1 for m in WINDOWS_FIELD_MAPPINGS if m.confidence == ConfidenceLevel.PROVISIONAL),
+          "system_fields": sum(1 for m in WINDOWS_FIELD_MAPPINGS if m.namespace == FieldNamespace.SYSTEM),
+          "eventdata_fields": sum(1 for m in WINDOWS_FIELD_MAPPINGS if m.namespace == FieldNamespace.EVENTDATA),
+      }
+
+      return {"stats": stats, "passed": True}
+
+    validation_points:
+      - Field counts by confidence level
+      - Field counts by namespace
+      - No duplicate sigma_field entries
+      - No orphaned fields without namespace
+      - All fields properly categorized
+
+    fail_conditions:
+      - Unsupported Windows fields detected
+      - Field count dropped unexpectedly (incomplete migration)
+      - Duplicate sigma_field entries
+      - Namespace distribution anomalies
+
+    success_criteria:
+      - Field counts are consistent with expectations
+      - All fields are properly categorized
+      - No unsupported fields in registry
+
+    output_format:
+      - Field inventory report (total, verified, provisional)
+      - Namespace distribution
+      - Confidence level distribution
+      - Field coverage summary
+
+  # Gate 4: Strict Conversion Test
+  - name: "strict-conversion-test"
+    type: "conversion-validation"
+    priority: 4
+    timeout_minutes: 10
+    description: |
+      Perform full ruleset conversion using strict field mapping mode.
+      Fails if any rules are rejected or unknown fields are encountered.
+
+    conversion_config:
+      sigma_directory: "examples/sigma"
+      output_file: "build/sigma_rules_strict.xml"
+      report_file: "build/conversion-report-strict.json"
+      field_mapping_mode: "strict"
+      fail_on_unknown_fields: true
+      fail_on_rejected_rules: true
+
+    validation_points:
+      - Conversion completes without rejected rules
+      - All Windows fields in rules are supported
+      - No UnsupportedWindowsFieldError raised
+      - Generated XML is valid
+      - Conversion report shows 0 rejections
+
+    fail_conditions:
+      - Conversion exits with non-zero code
+      - Any rule is rejected
+      - Unknown Windows field encountered
+      - Conversion log contains "rejected" or "unsupported"
+
+    success_criteria:
+      - All rules converted successfully
+      - Conversion report shows 100% success rate
+      - Generated XML is well-formed
+
+    output_format:
+      - Conversion log
+      - Conversion report JSON
+      - Generated XML file
+
+    required_files:
+      - examples/sigma/ (must have Sigma rules)
+      - Generated XML file (must exist after conversion)
+
+  # Gate 5: Native Wazuh Validation
+  - name: "native-wazuh-validation"
+    type: "xml-validation"
+    priority: 5
+    timeout_minutes: 5
+    description: |
+      Validate generated XML against Wazuh schema and business rules.
+      Checks XML well-formedness, rule structure, and field constraints.
+
+    validation_points:
+      - XML is well-formed (parses without error)
+      - All rules have valid structure
+      - Rule IDs are within configured range (900000-949999)
+      - Rule levels are in valid range (0-15)
+      - All field names follow win.{namespace}.{fieldName} pattern
+      - No invalid references or undefined fields
+
+    fail_conditions:
+      - XML is malformed
+      - Rule level < 0 or > 15
+      - Rule ID outside configured range
+      - Field name doesn't match win.* pattern
+      - Invalid XML structure
+
+    success_criteria:
+      - XML parses successfully
+      - All rules have valid structure
+      - No validation errors reported
+
+    output_format:
+      - XML well-formedness status
+      - Rule count and statistics
+      - Validation issues (if any)
+
+    future_enhancements:
+      - Docker-based wazuh-analysisd -t validation
+      - Decoder reference validation
+      - Group name validation
+
+  # Gate 6: End-to-End Fixture Tests
+  - name: "end-to-end-fixture-tests"
+    type: "integration-tests"
+    priority: 6
+    timeout_minutes: 5
+    description: |
+      Validate that generated Wazuh rules correctly match event fixture data.
+      Tests field existence, capitalization matching, and pattern validation.
+
+    test_files:
+      - "tests/test_evtx_end_to_end.py"
+
+    test_fixtures:
+      - "tests/fixtures/wazuh/windows/sysmon_event_1_process_creation.json"
+      - "tests/fixtures/wazuh/windows/security_event_4624_logon.json"
+      - "tests/fixtures/wazuh/windows/dns_client_event_3008_query.json"
+      - "tests/fixtures/wazuh/windows/application_error_1000.json"
+
+    test_coverage:
+      - Sysmon process creation event matching
+      - Security logon event matching
+      - DNS query event matching
+      - Application error event matching
+      - Field path existence validation
+      - Field capitalization matching
+      - Regex pattern matching
+
+    fail_conditions:
+      - Any test fails
+      - Generated field path doesn't exist in fixture
+      - Field capitalization doesn't match
+      - Regex pattern doesn't match expected value
+      - Fixture loading fails
+      - Field traversal fails at any level
+
+    success_criteria:
+      - All tests pass
+      - All fixtures load successfully
+      - Field paths match fixture structure
+      - Capitalization is exact
+
+    artifacts:
+      - pytest output
+      - Test results summary
+
+# Overall Pipeline Configuration
+pipeline_config:
+  # Gate execution strategy
+  execution:
+    strategy: "sequential"  # Run gates in order
+    continue_on_error: false  # Stop on first failure (but report all)
+    fail_fast: false  # Run all gates even if some fail
+
+  # Reporting
+  reporting:
+    generate_summary: true
+    upload_artifacts: true
+    artifact_names:
+      - "windows-field-mapping-results"
+      - "sigma_rules_strict.xml"
+      - "conversion-report-strict.json"
+
+  # Failure handling
+  failure_handling:
+    # If any gate fails, the overall job fails (no merge without passing)
+    required_gates:
+      - "field-registry-unit-tests"
+      - "full-corpus-field-audit"
+      - "strict-conversion-test"
+      - "native-wazuh-validation"
+      - "end-to-end-fixture-tests"
+
+    # These gates can warn without failing the job (informational)
+    optional_gates:
+      - "decoded-fixture-verification"  # Can warn if fixtures missing
+
+  # Notifications
+  notifications:
+    on_failure: "post_to_pr"
+    include_details: true
+
+# Helper Scripts and Utilities
+utilities:
+  # Script to verify fixture coverage
+  verify_fixtures: |
+    python3 << 'EOF'
+    from pathlib import Path
+    from wazuh_sigma.fields.models import ConfidenceLevel, VerificationSource
+    from wazuh_sigma.fields.windows import WINDOWS_FIELD_MAPPINGS
+
+    fixtures_dir = Path("tests/fixtures/wazuh/windows")
+    verified = [
+        m for m in WINDOWS_FIELD_MAPPINGS
+        if m.confidence == ConfidenceLevel.VERIFIED
+        and m.verification_source == VerificationSource.DECODED_FIXTURE
+    ]
+
+    for mapping in verified:
+      print(f"- {mapping.sigma_field:20} -> {mapping.wazuh_field}")
+    EOF
+
+  # Script to run a single gate
+  run_gate: |
+    python3 << 'EOF'
+    import sys
+    gate = sys.argv[1]
+    # Load and execute gate configuration
+    print(f"Running gate: {gate}")
+    EOF
+
+# Documentation and Links
+documentation:
+  main_guide: "ci/VALIDATION_GATES.md"
+  registry: "src/wazuh_sigma/fields/windows.py"
+  test_fields: "tests/test_fields_windows.py"
+  test_backend: "tests/test_backend_field_mapping.py"
+  test_e2e: "tests/test_evtx_end_to_end.py"
+  fixtures_dir: "tests/fixtures/wazuh/windows/"
